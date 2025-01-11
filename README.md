@@ -1,1 +1,1 @@
-# note-organization-board
+# noteboard
