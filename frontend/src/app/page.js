@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <main>
-      {/* Your code here */}
+      {/* code */}
     </main>
   )
 }

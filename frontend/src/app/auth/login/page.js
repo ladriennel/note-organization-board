@@ -7,7 +7,7 @@ export default function LoginPage() {
     identifier: '',
     password: ''
   })
-  const [error, setError] = useState('')
+  const [errors, setErrors] = useState({})
   const router = useRouter()
 
   const handleChange = (e) => {
@@ -20,6 +20,19 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
+      
+      const fieldErrors = {}
+      if(!formData.identifier){
+        fieldErrors.identifier = 'Username or email is required'
+      }
+      if(!formData.password){
+        fieldErrors.password = 'Password is required'
+      }
+      if (Object.keys(fieldErrors).length > 0) {
+        setErrors(fieldErrors)
+        return
+      }
+
       const res = await fetch('http://localhost:5001/api/auth/login', {
         method: 'POST',
         headers: {
@@ -34,23 +47,22 @@ export default function LoginPage() {
         throw new Error(data.error || 'Login failed')
       }
 
-      // Store user data in localStorage or state management solution
+      localStorage.setItem('token', data.token)
       localStorage.setItem('userData', JSON.stringify(data.user))
       
-      // Redirect to workspaces page
       router.push('/workspace')
     } catch (err) {
-      setError(err.message)
+      setErrors( err.message )
     }
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="w-full max-w-md">
-        {/* Add your login page design/styling here */}
+      {errors.general && <div className="text-red-500">{errors.general}</div>}
+        {/* Add design/styling here */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          {error && <div className="text-red-500">{error}</div>}
-          
+          {errors.identifier && <div className="text-red-500">{errors.identifier}</div>}
           <div>
             <input
               type="text"
@@ -59,10 +71,10 @@ export default function LoginPage() {
               onChange={handleChange}
               placeholder="Email or Username"
               className="w-full p-2 border rounded"
-              required
             />
           </div>
 
+          {errors.password && <div className="text-red-500">{errors.password}</div>}
           <div>
             <input
               type="password"
@@ -71,7 +83,6 @@ export default function LoginPage() {
               onChange={handleChange}
               placeholder="Password"
               className="w-full p-2 border rounded"
-              required
             />
           </div>
 

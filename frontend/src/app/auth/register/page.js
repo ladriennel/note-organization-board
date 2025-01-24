@@ -8,7 +8,7 @@ export default function RegisterPage() {
     email: '',
     password: ''
   })
-  const [error, setError] = useState('')
+  const [errors, setErrors] = useState({})
   const router = useRouter()
 
   const handleChange = (e) => {
@@ -21,6 +21,20 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
+      const fieldErrors = {}
+      if (!formData.username){
+        fieldErrors.username = 'Username is required'
+      }
+      if (!formData.email){
+        fieldErrors.email = 'Email is required'
+      }
+      if (!formData.password){
+        fieldErrors.password = 'Password is required'
+      } 
+      if (Object.keys(fieldErrors).length > 0) {
+        setErrors(fieldErrors)
+        return
+      }
       const res = await fetch('http://localhost:5001/api/auth/register', {
         method: 'POST',
         headers: {
@@ -35,20 +49,19 @@ export default function RegisterPage() {
         throw new Error(data.error || 'Registration failed')
       }
 
-      // Redirect to login page after successful registration
       router.push('/auth/login')
     } catch (err) {
-      setError(err.message)
+      setErrors(err.message)
     }
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="w-full max-w-md">
-        {/* Add your register page design/styling here */}
+      {errors.general && <div className="text-red-500">{errors.general}</div>}
+        {/* Add design/styling here */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          {error && <div className="text-red-500">{error}</div>}
-          
+          {errors.username && <div className="text-red-500">{errors.username}</div>}
           <div>
             <input
               type="text"
@@ -57,10 +70,10 @@ export default function RegisterPage() {
               onChange={handleChange}
               placeholder="Username"
               className="w-full p-2 border rounded"
-              required
             />
           </div>
 
+          {errors.email && <div className="text-red-500">{errors.email}</div>}
           <div>
             <input
               type="email"
@@ -69,10 +82,10 @@ export default function RegisterPage() {
               onChange={handleChange}
               placeholder="Email"
               className="w-full p-2 border rounded"
-              required
             />
           </div>
 
+          {errors.password && <div className="text-red-500">{errors.password}</div>}
           <div>
             <input
               type="password"
@@ -81,7 +94,6 @@ export default function RegisterPage() {
               onChange={handleChange}
               placeholder="Password"
               className="w-full p-2 border rounded"
-              required
             />
           </div>
 
