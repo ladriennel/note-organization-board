@@ -39,6 +39,7 @@ export default function LoginPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        credentials: 'include'
       })
 
       const data = await res.json()
@@ -47,12 +48,12 @@ export default function LoginPage() {
         throw new Error(data.error || 'Login failed')
       }
 
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('userData', JSON.stringify(data.user))
+      //localStorage.setItem('token', data.token)
+      //localStorage.setItem('userData', JSON.stringify(data.user))
       
       router.push('/workspace')
     } catch (err) {
-      setErrors( err.message )
+      setErrors({ general: err.message })
     }
   }
 

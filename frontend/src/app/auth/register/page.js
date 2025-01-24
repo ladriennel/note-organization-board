@@ -18,6 +18,11 @@ export default function RegisterPage() {
     })
   }
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return re.test(String(email).toLowerCase())
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -25,16 +30,22 @@ export default function RegisterPage() {
       if (!formData.username){
         fieldErrors.username = 'Username is required'
       }
-      if (!formData.email){
+      if (!formData.email) {
         fieldErrors.email = 'Email is required'
+      } else if (!validateEmail(formData.email)) {
+        fieldErrors.email = 'Invalid email format'
       }
-      if (!formData.password){
+      if (!formData.password) {
         fieldErrors.password = 'Password is required'
-      } 
+      } /*else if (formData.password.length < 6) {
+        fieldErrors.password = 'Password must be at least 6 characters'
+      }*/
+
       if (Object.keys(fieldErrors).length > 0) {
         setErrors(fieldErrors)
         return
       }
+
       const res = await fetch('http://localhost:5001/api/auth/register', {
         method: 'POST',
         headers: {
@@ -51,7 +62,7 @@ export default function RegisterPage() {
 
       router.push('/auth/login')
     } catch (err) {
-      setErrors(err.message)
+      setErrors({ general: err.message })
     }
   }
 
