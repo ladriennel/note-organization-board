@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
         res.json(workspace);
     } catch (err) {
         console.error(err.message);
-        es.status(500).json({ error: 'Server error, please try again later' });
+        res.status(500).json({ error: 'Server error, please try again later' });
     }
 
 });
