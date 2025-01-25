@@ -19,7 +19,7 @@ export default function RegisterPage() {
   }
 
   const validateEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     return re.test(String(email).toLowerCase())
   }
 
@@ -28,15 +28,15 @@ export default function RegisterPage() {
     try {
       const fieldErrors = {}
       if (!formData.username){
-        fieldErrors.username = 'Username is required'
+        fieldErrors.username = '* Username is required'
       }
       if (!formData.email) {
-        fieldErrors.email = 'Email is required'
+        fieldErrors.email = '* Email is required'
       } else if (!validateEmail(formData.email)) {
-        fieldErrors.email = 'Invalid email format'
+        fieldErrors.email = '* Invalid email format'
       }
       if (!formData.password) {
-        fieldErrors.password = 'Password is required'
+        fieldErrors.password = '* Password is required'
       } /*else if (formData.password.length < 6) {
         fieldErrors.password = 'Password must be at least 6 characters'
       }*/
@@ -71,9 +71,10 @@ export default function RegisterPage() {
       <div className="w-full max-w-md">
       {errors.general && <div className="text-red-500">{errors.general}</div>}
         {/* Add design/styling here */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {errors.username && <div className="text-red-500">{errors.username}</div>}
-          <div>
+        <form onSubmit={handleSubmit} className="space-y-6 relative">
+          
+          <div className="relative">
+            {errors.username && <div className="text-red-500 absolute -top-5 left-0 text-sm">{errors.username}</div>}
             <input
               type="text"
               name="username"
@@ -84,8 +85,8 @@ export default function RegisterPage() {
             />
           </div>
 
-          {errors.email && <div className="text-red-500">{errors.email}</div>}
-          <div>
+          <div className="relative">
+            {errors.email && <div className="text-red-500 absolute -top-5 left-0 text-sm">{errors.email}</div>}
             <input
               type="email"
               name="email"
@@ -96,8 +97,8 @@ export default function RegisterPage() {
             />
           </div>
 
-          {errors.password && <div className="text-red-500">{errors.password}</div>}
-          <div>
+          <div className="relative">
+            {errors.password && <div className="text-red-500 absolute -top-5 left-0 text-sm">{errors.password}</div>}
             <input
               type="password"
               name="password"

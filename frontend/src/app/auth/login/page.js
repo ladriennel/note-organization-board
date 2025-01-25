@@ -23,10 +23,10 @@ export default function LoginPage() {
       
       const fieldErrors = {}
       if(!formData.identifier){
-        fieldErrors.identifier = 'Username or email is required'
+        fieldErrors.identifier = '* Username or email is required'
       }
       if(!formData.password){
-        fieldErrors.password = 'Password is required'
+        fieldErrors.password = '* Password is required'
       }
       if (Object.keys(fieldErrors).length > 0) {
         setErrors(fieldErrors)
@@ -45,7 +45,13 @@ export default function LoginPage() {
       const data = await res.json()
 
       if (!res.ok) {
-        throw new Error(data.error || 'Login failed')
+        if (data.error === 'Invalid password or user') {
+          fieldErrors.identifier = '* Incorrect login information or cannot find user'
+        } else if (data.error === 'Could not login') {
+          fieldErrors.identifier = '* Could not login'
+        }
+        setErrors(fieldErrors)
+        return
       }
 
       //localStorage.setItem('token', data.token)
@@ -62,9 +68,9 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
       {errors.general && <div className="text-red-500">{errors.general}</div>}
         {/* Add design/styling here */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {errors.identifier && <div className="text-red-500">{errors.identifier}</div>}
-          <div>
+        <form onSubmit={handleSubmit} className="space-y-6 relative">
+          <div className="relative">
+          {errors.identifier && <div className="text-red-500 absolute -top-5 left-0 text-sm">{errors.identifier}</div>}
             <input
               type="text"
               name="identifier"
@@ -75,8 +81,8 @@ export default function LoginPage() {
             />
           </div>
 
-          {errors.password && <div className="text-red-500">{errors.password}</div>}
-          <div>
+          <div className="relative">
+            {errors.password && <div className="text-red-500 absolute -top-5 left-0 text-sm">{errors.password}</div>}
             <input
               type="password"
               name="password"
