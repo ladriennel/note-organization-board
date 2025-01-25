@@ -71,7 +71,7 @@ export default function RegisterPage() {
       <div className="w-full max-w-md">
       {errors.general && <div className="text-red-500">{errors.general}</div>}
         {/* Add design/styling here */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {errors.username && <div className="text-red-500">{errors.username}</div>}
           <div>
             <input

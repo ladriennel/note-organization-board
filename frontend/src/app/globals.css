@@ -1,4 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&family=Overlock+SC:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+:root {
+    --text-color: #FFFFFF; 
+    --bg-color: #B4876C; 
+    --border-color: #D7B7A5;
+    --secondary1-color: #E7BCA3; 
+    --secondary2-color: #D0A58C; 
+    --secondary4-color: #EBDEAD; 
+    --font-header: 'Kirang Haerang', cursive;
+    --font-body: 'Overlock SC', cursive;
+
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-header); 
+    color: var(--text-color);
+    margin: 0;
+  }
+
+  p, span, a {
+    font-family: var(--font-body); 
+  }
+
+  

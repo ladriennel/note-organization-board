@@ -62,7 +62,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
       {errors.general && <div className="text-red-500">{errors.general}</div>}
         {/* Add design/styling here */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {errors.identifier && <div className="text-red-500">{errors.identifier}</div>}
           <div>
             <input

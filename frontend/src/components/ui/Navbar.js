@@ -1,5 +1,6 @@
-/*import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+'use client'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Navbar() {
   const [user, setUser] = useState(null)
@@ -16,14 +17,14 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem('userData')
-    fetch('http://localhost:5001/api/auth/logout', {
+    /*fetch('http://localhost:5001/api/auth/logout', {
       method: 'POST',
       credentials: 'include'
     }).then(() => {
       window.location.href = '/'
     }).catch(err => {
       console.error('Logout failed', err)
-    })
+    })*/
     router.push('/')
   }
 
@@ -71,4 +72,3 @@ export default function Navbar() {
   )
 }
 
-*/
