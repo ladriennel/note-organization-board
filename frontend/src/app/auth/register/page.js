@@ -68,11 +68,12 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-md">
-      {errors.general && <div className="text-red-500">{errors.general}</div>}
+      <title>Register</title>
+      <div className="w-full max-w-md relative">
+        <h1 className="w-full text-5xl absolute -top-1/3 right-1/3 whitespace-nowrap">----------- Create an Account! -----------</h1>
+        {errors.general && <div className="text-red-500">{errors.general}</div>}
         {/* Add design/styling here */}
         <form onSubmit={handleSubmit} className="space-y-6 relative">
-          
           <div className="relative">
             {errors.username && <div className="text-red-500 absolute -top-5 left-0 text-sm">{errors.username}</div>}
             <input
@@ -81,7 +82,8 @@ export default function RegisterPage() {
               value={formData.username}
               onChange={handleChange}
               placeholder="Username"
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded placeholder-white"
+              style={{ backgroundColor: 'var(--secondary1-color)' }}
             />
           </div>
 
@@ -93,7 +95,8 @@ export default function RegisterPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded placeholder-white"
+              style={{ backgroundColor: 'var(--border-color)' }}
             />
           </div>
 
@@ -105,13 +108,15 @@ export default function RegisterPage() {
               value={formData.password}
               onChange={handleChange}
               placeholder="Password"
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded placeholder-white"
+              style={{ backgroundColor: 'var(--secondary2-color)' }}
             />
           </div>
 
           <button 
             type="submit"
             className="w-full bg-blue-500 text-white p-2 rounded"
+            style={{ backgroundColor: 'var(--bg-color)' }}
           >
             Register
           </button>

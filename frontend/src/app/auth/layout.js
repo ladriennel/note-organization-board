@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
         {/*<Navbar />*/}
         <div className="relative w-full h-screen "
           style={{ backgroundColor: 'var(--bg-color)' }}>
-
+    
           <div className="absolute inset-0 h-3/5 mt-36 bg-blue-500 z-10"
             style={{ backgroundColor: 'var(--border-color)' }}>
           </div>
