@@ -115,8 +115,8 @@ export default function RegisterPage() {
 
           <button 
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded"
-            style={{ backgroundColor: 'var(--bg-color)' }}
+            className="w-full text-white p-2 rounded"
+            style={{ backgroundColor: 'var(--bg-color)', fontSize : 20 }}
           >
             Register
           </button>
