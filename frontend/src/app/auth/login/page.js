@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function LoginPage() {
+const LoginPage = () =>  {
   const [formData, setFormData] = useState({
     identifier: '',
     password: ''
@@ -109,3 +109,4 @@ export default function LoginPage() {
     </div>
   )
 }
+export default LoginPage

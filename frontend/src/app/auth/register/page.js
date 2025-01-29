@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function RegisterPage() {
+const RegisterPage = () => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -125,3 +125,5 @@ export default function RegisterPage() {
     </div>
   )
 }
+
+export default RegisterPage

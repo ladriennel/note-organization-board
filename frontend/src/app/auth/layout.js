@@ -4,7 +4,7 @@ import '../globals.css'
 //import Navbar from '../../components/ui/Navbar'
 
 
-export default function RootLayout({ children }) {
+const RootLayout = ({ children }) => {
   const router = useRouter()
 
   const handleBack = () => {
@@ -51,5 +51,5 @@ export default function RootLayout({ children }) {
   )
 }
 
-
+export default RootLayout
 

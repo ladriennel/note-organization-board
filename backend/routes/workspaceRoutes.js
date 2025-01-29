@@ -1,7 +1,32 @@
 const express = require('express');
 const Workspace = require('../models/Workspace');
+const jwt = require('jsonwebtoken');
 
 const router = express.Router();
+
+  //get all workspaces
+  router.get('/', async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader) {
+            return res.status(401).json({ error: 'Authorization token required' });
+        }
+
+        const token = authHeader.split(' ')[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const userId = decoded.userId;
+
+        const workspaces = await Workspace.find({ userId });
+      if (!workspaces || workspaces.length === 0) {
+        return res.status(404).json({ error: 'No workspaces found for this user' });
+      }
+      res.json(workspaces); 
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).json({ error: 'Server error, please try again later' });
+    }
+  });
+  
 
 //add Workspace
 router.post('/', async (req, res) => {

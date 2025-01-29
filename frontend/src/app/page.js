@@ -1,7 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 
-export default function Home() {
+const Home = () => {
   const router = useRouter()
 
   const handleLogin = () => {
@@ -64,3 +64,4 @@ export default function Home() {
     </html>
   )
 }
+export default Home
