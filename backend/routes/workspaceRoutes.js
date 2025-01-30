@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
-  //get all workspaces
-  router.get('/', async (req, res) => {
+//get all workspaces
+router.get('/', async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
         if (!authHeader) {
@@ -17,16 +17,14 @@ const router = express.Router();
         const userId = decoded.userId;
 
         const workspaces = await Workspace.find({ userId });
-      if (!workspaces || workspaces.length === 0) {
-        return res.status(404).json({ error: 'No workspaces found for this user' });
-      }
-      res.json(workspaces); 
+        
+        res.json(workspaces);
     } catch (err) {
-      console.error(err.message);
-      res.status(500).json({ error: 'Server error, please try again later' });
+        console.error(err.message);
+        res.status(500).json({ error: 'Server error, please try again later' });
     }
-  });
-  
+});
+
 
 //add Workspace
 router.post('/', async (req, res) => {
@@ -74,7 +72,7 @@ router.patch('/:workspaceId/notes/:noteId', async (req, res) => {
         if (!note) {
             return res.status(404).json({ error: 'Note not found' });
         }
-        
+
 
         // Update note properties if new values are provided
         if (text) note.text = text;
