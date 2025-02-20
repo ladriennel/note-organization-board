@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-const LoginPage = () =>  {
+const LoginPage = () => {
   const [formData, setFormData] = useState({
     identifier: '',
     password: ''
@@ -20,12 +20,12 @@ const LoginPage = () =>  {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      
+
       const fieldErrors = {}
-      if(!formData.identifier){
+      if (!formData.identifier) {
         fieldErrors.identifier = '* Username or email is required'
       }
-      if(!formData.password){
+      if (!formData.password) {
         fieldErrors.password = '* Password is required'
       }
       if (Object.keys(fieldErrors).length > 0) {
@@ -56,23 +56,24 @@ const LoginPage = () =>  {
 
       //localStorage.setItem('token', data.token)
       //localStorage.setItem('userData', JSON.stringify(data.user))
-      
+      sessionStorage.removeItem('isGuest');
       router.push('/workspace')
     } catch (err) {
       setErrors({ general: err.message })
     }
   }
 
+
   return (
     <div className="min-h-screen flex items-center justify-center">
       <title>Login</title>
       <div className="w-full max-w-md relative">
-      <h1 className="w-full text-5xl absolute -top-2/3 right-1/3 whitespace-nowrap">------------------ Login! ------------------</h1>
+        <h1 className="w-full text-5xl absolute -top-2/3 right-1/3 whitespace-nowrap">------------------ Login! ------------------</h1>
         {errors.general && <div className="text-red-500">{errors.general}</div>}
         {/* Add design/styling here */}
         <form onSubmit={handleSubmit} className="space-y-6 relative">
           <div className="relative">
-          {errors.identifier && <div className="text-red-500 absolute -top-5 left-0 text-sm">{errors.identifier}</div>}
+            {errors.identifier && <div className="text-red-500 absolute -top-5 left-0 text-sm">{errors.identifier}</div>}
             <input
               type="text"
               name="identifier"
@@ -93,14 +94,14 @@ const LoginPage = () =>  {
               onChange={handleChange}
               placeholder="Password"
               className="w-full p-2 border rounded placeholder-white"
-              style={{ backgroundColor: 'var(--border-color)'}}
+              style={{ backgroundColor: 'var(--border-color)' }}
             />
           </div>
 
-          <button 
+          <button
             type="submit"
             className="w-full text-white p-2 rounded"
-            style={{ backgroundColor: 'var(--bg-color)', fontSize : 20 }}
+            style={{ backgroundColor: 'var(--bg-color)', fontSize: 20 }}
           >
             Login
           </button>

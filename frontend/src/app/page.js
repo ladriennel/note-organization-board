@@ -13,8 +13,10 @@ const Home = () => {
   }
 
   const handleGuest = () => {
+    sessionStorage.setItem('isGuest', 'true');
     router.push('/workspace')
   }
+
 
   return (
     <html lang="en">
@@ -34,26 +36,26 @@ const Home = () => {
           <h1 className='absolute top-20 text-6xl'>
             Welcome to your customizable Workspace!
           </h1>
-          
+
           <div className="absolute flex flex-col space-y-4 w-1/4 inset-y-1/3">
-            <button 
+            <button
               className=" py-3 text-white rounded-lg shadow"
               onClick={handleLogin}
               style={{ backgroundColor: 'var(--secondary1-color)', fontSize: 24 }}
             >
               Login
             </button>
-            <button 
+            <button
               className=" py-3 text-white rounded-lg shadow"
               onClick={handleRegister}
-              style={{ backgroundColor: 'var(--border-color)', fontSize: 24}}
+              style={{ backgroundColor: 'var(--border-color)', fontSize: 24 }}
             >
               Register
             </button>
-            <button 
+            <button
               className=" py-3 text-white rounded-lg shadow"
               onClick={handleGuest}
-              style={{ backgroundColor: 'var(--secondary2-color)', fontSize: 24}}
+              style={{ backgroundColor: 'var(--secondary2-color)', fontSize: 24 }}
             >
               Continue as Guest
             </button>
